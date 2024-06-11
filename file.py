@@ -5,13 +5,16 @@ def generate_ducky_script(input_file, output_file, delay):
     with open(output_file, 'w') as f:
         f.write("DELAY 1000\n")  # Initial delay to allow the system to recognize the device
 
-        for line in lines:
-            for char in line:
-                if char == '\n':
-                    f.write("ENTER\n")
-                else:
-                    f.write(f"STRING {char}\n")
-                    f.write(f"DELAY {delay}\n")
+        while True:
+            for line in lines:
+                for char in line:
+                    if char == '\n':
+                        f.write("ENTER\n")
+                    else:
+                        f.write(f"STRING {char}\n")
+                        f.write(f"DELAY {delay}\n")
+            # Adding a delay between repetitions
+            f.write(f"DELAY {delay * 10}\n")  # Adjust this delay as necessary for the repeating cycle
 
 if __name__ == "__main__":
     input_file = "input.txt"  # Path to the input text file
